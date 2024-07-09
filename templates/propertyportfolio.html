@@ -1,0 +1,34 @@
+{% extends "layout.html" %} <! inherits the website layout from the layout.html file. Inorder to not repeat code>
+
+{% block content %}
+
+<div class="button" style="text-align:center; margin-top: 50px; margin-right: 50px">
+    <h1>NUMBER OF PROPERTIES IN PROPERTY WATCHLIST: {{WatchlistNo}} </h1>
+</div>
+
+<div class="button" style="text-align:center; margin-top: 20px; margin-right: 50px">
+    <h1>NUMBER OF PROPERTIES IN PURCHASED PROPERTY LIST: {{PriceNo}} </h1>
+</div>
+
+<div class="button" style="text-align:center; margin-top: 20px; margin-right: 50px">
+    <h1>TOTAL PRICE PAID: £{{TotalPrice}} </h1>
+</div>
+
+<div class="button" style="text-align:center; margin-top: 20px; margin-right: 50px">
+    <h1>TOTAL CURRENT VALUATION: £{{TotalValuation}} </h1>
+</div>
+
+{% if TotalProfit %}
+
+<div class="button" style="text-align:center; margin-top: 20px; margin-right: 50px">
+    <h1>TOTAL PROFIT: £{{TotalProfit}} </h1>
+</div>
+
+{% elif TotalLoss %}
+
+<div class="button" style="text-align:center; margin-top: 25px; margin-right: 50px">
+    <h1>TOTAL LOSS: £{{TotalLoss}} </h1>
+</div>
+
+{% endif %}
+{% endblock content %}

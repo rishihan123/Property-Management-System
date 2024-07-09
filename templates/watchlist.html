@@ -1,0 +1,25 @@
+{% extends "layout.html" %} <! inherits the website layout from the layout.html file. Inorder to not repeat code>
+
+{% block content %}
+<div class="button" style="text-align:center">
+    <h1><u>PROPERTY WATCHLIST</u></h1>
+</div>
+
+<a class = "button" style = "background-color: red; text-align: center; color: white; padding: 10px; border-radius: 4px; text-decoration: none; font-size: 20px; font-weight: bold; margin-left: 550px"href="{{homelink}}">Clear Property WatchList</a>
+
+<div style="text-align: center">
+    <br>
+    <br>
+    <a class = "listbutton" href="{{property1link}}">1) {{ property1 }}</a>
+    <br>
+    <a class = "listbutton" href="{{property2link}}">2) {{ property2 }}</a>
+    <br>
+    <a class = "listbutton" href="{{property3link}}">3) {{ property3 }}</a>
+    <br>
+    <a class = "listbutton" href="{{property4link}}">4) {{ property4 }}</a>
+    <br>
+    <a class = "listbutton" href="{{property5link}}">5) {{ property5 }}</a>
+</div>
+
+
+{% endblock content %}

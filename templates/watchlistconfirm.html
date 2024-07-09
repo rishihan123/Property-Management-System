@@ -1,0 +1,16 @@
+{% extends "layout.html" %} <! inherits the website layout from the layout.html file. Inorder to not repeat code>
+
+{% block content %}
+
+{% if error %}
+<div class="button" style="text-align:center; margin-top: 200px;">
+    <h1>5 PROPERTIES ALREADY EXIST IN YOUR PROPERTY WATCHLIST. PLEASE DELETE ONE TO ADD ANOTHER</h1>
+</div>
+
+{% else %}
+<div class="button" style="text-align:center; margin-top: 200px;">
+    <h1>PROPERTY HAS BEEN ADDED TO YOUR PROPERTY WATCHLIST</h1>
+</div>
+{% endif %}
+
+{% endblock content %}

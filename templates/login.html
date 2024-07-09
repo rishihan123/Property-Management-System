@@ -1,0 +1,38 @@
+{% extends "layout.html" %} <! inherits the website layout from the layout.html file. Inorder to not repeat code>
+
+
+{% block content %} <! Overrides the body content of the layout.html file>
+    {% if login %}
+    <div class="button">
+        <a class="text"><h1><b>You are already logged in as {{name}} </b></h1></a>
+    </div>
+        <form method="post" action="/logout">
+            <input type="image" src="{{url_for('static', filename='logout.png')}}" name="logout" width = 200 height = 200 style = "margin-left: 35px"></a> 
+        </form>
+        <div class = "button">
+            <a class="button"><h2><b>SIGN OUT</b></h2></a>
+        </div>
+
+    {% else %}
+        <div class="button">
+            <a class="text"><h1><b>Login to your PMS Account</b></h1></a>
+            <a class="text" style="float: right; margin-right: 60px;"><h1><b>Or Create Account</b></h1></a>
+        </div>
+
+        <div class = "button">
+            <a href="create" style="float: right; margin-right: 60px; color: dodgerblue;">Click here to create account</a>
+            <a class="text"><form action = "login" method = "post">
+                <p>Login Details: </p>
+                <p><input type="text" name="id" placeholder="Username..." /></p>
+                <p><input type="password" name="password" placeholder="Password..." /></p>
+                <p><input type="submit" value="submit" /></p>
+                {% if error %}
+                <p style="color: red"> {{ error }} </p>
+                {% else %}
+                <p> </p>
+                {% endif %}
+            </form></a>
+        </div>
+
+    {% endif %}
+{% endblock content %}

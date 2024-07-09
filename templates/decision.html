@@ -1,0 +1,181 @@
+{% extends "layout.html" %} <! inherits the website layout from the layout.html file. Inorder to not repeat code>
+
+{% block head %}
+
+<meta charset="utf-8">
+<title>Create a draggable Marker</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 100; bottom: 150; left: 10; width: 40%; }
+</style>
+
+{% endblock head %}
+
+{% block content %}
+
+{% if address %}
+
+<div class="button" style="margin-left: 580px; margin-right: 70px">
+    <label><h2>{{ address }}</h2></label>
+</div>
+
+<div class="button" style="margin-left: 580px">
+    <label>{{city}}</label>
+</div>
+
+<div class="button" style="margin-left: 580px">
+    <label>{{county}}</label>
+</div>
+
+<div class="button" style="margin-left: 580px">
+    <label>{{postcode}}</label>
+</div>
+
+<div class="button" style="margin-left: 580px; margin-right: 70px">
+    <label><h2>What would you like to do with this property?</h2></label>
+</div>
+
+<form action="watchlistmaker" method="post">
+    <div class="button" style="margin-top: 10px; margin-left: 580px">
+        <input style="width: 90%; height: 100px; background-color: rgb(1, 170, 193); border: none; font-weight: bold; font-size: 30px; color: white; padding: 10px 10px; cursor: pointer; border-radius: 10px" type="submit" value= "Add to Property Watch List">
+    </div>
+</form>
+
+<form action="purchaselistmaker" method="post">
+    <div class="button" style="margin-top: 10px; margin-left: 580px">
+        <input style="width: 90%; height: 100px; background-color: rgb(1, 170, 193); border: none; font-weight: bold; font-size: 30px; color: white; padding: 10px 10px; cursor: pointer; border-radius: 10px" name="purchased" type="submit" value= "Add to Purchased Property List">
+    </div>
+</form>
+
+<div class="button" style="margin-left: 580px; margin-right: 70px; margin-top: 60px;">
+    <label><b>NOTE: Properties purchased before 1995 are unavailable</b></label>
+</div>
+
+
+<style>
+    .coordinates {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: absolute;
+    bottom: 500px;
+    left: 10px;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 11px;
+    line-height: 18px;
+    border-radius: 3px;
+    display: none;
+    }
+    </style>
+    
+    <div id="map"></div>
+    <pre id="coordinates" class="coordinates"></pre>
+    
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoicm9vbWllcmNhbmluZTI0IiwiYSI6ImNsNTVwMnp2NjFiZDgzaW15OHp6Ym8zYnQifQ.RncuAoBBMjEFjy8b82a3ug';
+    const coordinates = document.getElementById('coordinates');
+    const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [{{ longitude }}, {{ latitude }}],
+    zoom: 16
+    });
+    
+    const marker = new mapboxgl.Marker({
+    draggable: false
+    })
+    .setLngLat([{{ longitude }}, {{ latitude }}])
+    .addTo(map);
+    
+    function onDragEnd() {
+    let lngLat = marker.getLngLat();
+    coordinates.style.display = 'block';
+    coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+    }
+
+    marker.on('dragend', onDragEnd);
+    </script>
+
+
+{% else %}
+    <div class="button" style="margin-left: 580px; margin-right: 70px">
+        <label><h2>Please move the marker to the correct house and copy and paste the latitude and longitude coordinates into the correct boxes</h2></label>
+    </div>
+
+    <form action="decision" method="post">
+
+    <div class="button" style="margin-top: 25px; margin-left: 600px; color: #808080">
+        <label><b>Longitude</b></label>
+    </div>
+
+    <div class="button" style="margin-top: 5px; margin-left: 600px;">
+        <input style="width: 90%; padding: 6px 10px" name="longitude" placeholder="Longitude" required>
+    </div>
+
+    <div class="button" style="margin-top: 25px; margin-left: 600px; color: #808080">
+        <label><b>Latitude</b></label>
+    </div>
+
+    <div class="button" style="margin-top: 5px; margin-left: 600px;">
+        <input style="width: 90%; padding: 6px 10px" name="latitude" placeholder="Longitude" required>
+    </div>
+
+    <div class="button" style="margin-top: 40px; margin-left: 600px">
+        <input style="width: 90%; background-color: #04AA6D; border: none; color: white; padding: 10px 10px; cursor: pointer" type="submit" value="Submit">
+    </div>
+
+    </form>
+
+
+
+
+    <style>
+        .coordinates {
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        position: absolute;
+        bottom: 647px;
+        left: 10px;
+        padding: 5px 10px;
+        margin: 0;
+        font-size: 11px;
+        line-height: 18px;
+        border-radius: 3px;
+        display: none;
+        }
+        </style>
+        
+        <div id="map"></div>
+        <pre id="coordinates" class="coordinates"></pre>
+        
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1Ijoicm9vbWllcmNhbmluZTI0IiwiYSI6ImNsNTVwMnp2NjFiZDgzaW15OHp6Ym8zYnQifQ.RncuAoBBMjEFjy8b82a3ug';
+        const coordinates = document.getElementById('coordinates');
+        const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [{{ longitude }}, {{ latitude }}],
+        zoom: 16
+        });
+        
+        const marker = new mapboxgl.Marker({
+        draggable: true
+        })
+        .setLngLat([{{ longitude }}, {{ latitude }}])
+        .addTo(map);
+        
+        function onDragEnd() {
+        let lngLat = marker.getLngLat();
+        coordinates.style.display = 'block';
+        coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+        }
+
+        marker.on('dragend', onDragEnd);
+        </script>
+
+{% endif %}
+
+{% endblock content %}

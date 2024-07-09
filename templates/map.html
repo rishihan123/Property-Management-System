@@ -1,0 +1,63 @@
+{% extends "layout.html" %} <! inherits the website layout from the layout.html file. Inorder to not repeat code>
+
+{% block head %} <! Overrides the head content of the layout.html file>
+{% endblock head %}
+
+{% block content %} <! Overrides the body content of the layout.html file>
+
+{% if error %}
+<div class="button" style="text-align:center; margin-top: 200px; margin-right: 50px">
+    <h1>{{ error }}</h1>
+</div>
+
+{% else %}
+<form  action="decision" method="post">
+
+    <div class="button" style="margin-top: 10px; margin-left: 20px; color: #808080">
+        <label><b>Address</b></label>
+    </div>
+
+    <div class="button" style="margin-top: 5px; margin-left: 20px; width: 100%">
+        <input style="width: 90%; padding: 6px 10px" name="address" placeholder="House number and street" required >
+    </div>
+
+    <div class="button" style="margin-top: 25px; margin-left: 20px; color: #808080">
+        <label><b>City</b></label>
+    </div>
+
+    <div class="button" style="margin-top: 5px; margin-left: 20px; width: 100%">
+        <input style="width: 90%; padding: 6px 10px" name="city" placeholder="City" required >
+    </div>
+
+    <div class="button" style="margin-top: 25px; margin-left: 20px; color: #808080">
+        <label><b>County</b></label>
+    </div>
+
+    <div class="button" style="margin-top: 5px; margin-left: 20px; width: 100%">
+        <input style="width: 90%; padding: 6px 10px" name="county" placeholder="County" required >
+    </div>
+
+    <div class="button" style="margin-top: 25px; margin-left: 20px; color: #808080">
+        <label><b>Postcode</b></label>
+    </div>
+
+    <div class="button" style="margin-top: 5px; margin-left: 20px; width: 100%">
+        <input style="width: 90%; padding: 6px 10px" name="postcode" placeholder="Postcode" required >
+    </div>
+
+    <div class="button" style="margin-top: 40px; margin-left: 20px">
+        <input style="width: 91.5%; background-color: #04AA6D; border: none; color: white; padding: 10px 10px; cursor: pointer" type="submit" value="Submit">
+    </div>
+
+    {% if error %}
+
+    <div class="button" style="margin-top: 25px; margin-left: 20px; color: red">
+        <h1<b>{{error}}</b></h1>
+    </div>
+
+    {% endif %}
+
+</form>
+
+{% endif %}
+{% endblock content %}

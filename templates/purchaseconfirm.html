@@ -1,0 +1,22 @@
+{% extends "layout.html" %} <! inherits the website layout from the layout.html file. Inorder to not repeat code>
+
+{% block content %}
+
+{% if error %}
+<div class="button" style="text-align:center; margin-top: 200px;">
+    <h1>5 PROPERTIES ALREADY EXIST IN YOUR PURCHASED PROPERTY LIST> PLEASE DELETE ONE TO ADD ANOTHER</h1>
+</div>
+
+{% elif error2 %}
+<div class="button" style="text-align:center; margin-top: 200px; margin-right: 50px">
+    <h1>{{error2}}</h1>
+</div>
+
+{% else %}
+
+<div class="button" style="text-align:center; margin-top: 200px;">
+    <h1>PROPERTY HAS BEEN ADDED TO YOUR PURCHASED PROPERTY LIST</h1>
+</div>
+{% endif %}
+
+{% endblock content %}

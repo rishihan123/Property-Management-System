@@ -1,0 +1,88 @@
+{% extends "layout.html" %} <! inherits the website layout from the layout.html file. Inorder to not repeat code>
+
+{% block content %} <! Overrides the body content of the layout.html file>
+    {% if login %}
+        <div class="button" style="text-align: center">
+            <h1><b>{{name}} | Homepage </b></h1>
+        </div>
+        
+        {% if message %}
+        <div class="button" style="text-align: center; color:green;">
+            <h1><b> {{ message }} </b></h1>
+        </div>
+        {% endif %}
+        
+        <style>
+            .buttonhome {
+            width: 90%;
+             height: 100px;
+              background: rgb(2,0,36);
+               background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(1,163,185,1) 35%, rgb(2, 0, 36, 1) 100%);
+                border: none; 
+                font-weight: bold;
+                 font-size: 30px; 
+                 color: white; 
+                 padding: 10px 10px;
+                  cursor: pointer;
+                   border-radius: 10px;
+                   transition: ease-in-out 0.5s background-color;
+            }
+            .buttonhome:hover{
+                background: linear-gradient(90deg, rgba(255,0,36,1) 0%, rgb(26, 180, 201) 35%, rgba(255,0,36,1) 100%);
+            
+
+            }
+
+            .buttonhome2 {
+            width: 90%;
+             height: 100px;
+              background: rgb(2,0,36);
+               background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(40, 218, 241) 35%, rgb(2, 0, 36, 1) 100%);
+                border: none; 
+                font-weight: bold;
+                 font-size: 30px; 
+                 color: white; 
+                 padding: 10px 10px;
+                  cursor: pointer;
+                   transition: ease-in-out 0.5s all;
+            }
+            .buttonhome2:hover{
+                border: 10px solid;
+                border-image: 
+                    linear-gradient(
+                        to left,
+                        rgb(243, 52, 52),
+                        rgba(160, 146, 236)
+                    ) 1 100%;
+                border-image-slice: 1;
+                border-width: 7px
+            
+            }
+        </style>
+
+        <form action="watchlist" method="post">
+            <div class="button" style="margin-top: 20px; margin-left: 100px; border-radius: 10px;">
+                <input class="buttonhome" type="submit" value= "Property Watchlist">
+            </div>
+        </form>
+        
+        <form action="purchasedpropertylist" method="post">
+            <div class="button" style="margin-top: 40px; margin-left: 100px;">
+                <input class="buttonhome"  type="submit" value= "Purchased Property List">
+            </div>
+        </form>
+
+        <form action="propertyportfolio" method="post">
+            <div class="button" style="margin-top: 40px; margin-left: 100px; border-radius: 10px;">
+                <input class="buttonhome" type="submit" value= "Property Portfolio">
+            </div>
+        </form>
+    {% else %}
+    <div class="button" style="text-align:center; margin-top: 200px; margin-right: 50px">
+        <h1>Please login or create an account to continue</h1>
+    </div>   
+        {% if error %}
+        <p style="color: red">Verification code has timed out. Please try again</p>
+        {% endif %}
+    {% endif %}
+{% endblock content %}

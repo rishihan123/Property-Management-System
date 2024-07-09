@@ -1,0 +1,108 @@
+{% extends "layout.html" %} <! inherits the website layout from the layout.html file. Inorder to not repeat code>
+
+{% block head %}
+
+<meta charset="utf-8">
+<title>Create a draggable Marker</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 100; bottom: 150; left: 10; width: 40%; }
+</style>
+
+{% endblock head %}
+
+{% block content %}
+
+{% if error %}
+<div class="button" style="text-align:center; margin-top: 200px; margin-right: 50px">
+    <h1>PROPERTY DOESN'T EXIST. PLEASE USE THE PROPERTY FINDER IN ORDER TO ADD MORE PROPERTIES TO YOUR PURCHASED PROPERTY LIST</h1>
+</div>
+
+{% else %}
+
+
+<div class="button" style="margin-left: 580px; margin-right: 70px">
+    <label><h3>ADDRESS: {{ address }}</h3></label>
+</div>
+
+<div class="button" style="margin-left: 580px; margin-right: 70px;">
+    <label><h3>CITY: {{ city }}</h3></label>
+</div>
+
+<div class="button" style="margin-left: 580px; margin-right: 70px">
+    <label><h3>COUNTY: {{ county }}</h3></label>
+</div>
+
+<div class="button" style="margin-left: 580px; margin-right: 70px">
+    <label><h3>POSTCODE: {{ postcode }}</h3></label>
+</div>
+
+<div class="button" style="margin-left: 580px; margin-right: 70px">
+    <label><h3>PURCHASE PRICE: £{{ price }}</h3></label>
+</div>
+
+<div class="button" style="margin-left: 580px; margin-right: 70px">
+    <label><h3>PURCHASE DATE: {{ date }}</h3></label>
+</div>
+
+<div class="button" style="margin-left: 580px; margin-right: 70px">
+    <label><h3>ESTIMATED VALUATION: £{{ valuation }}</h3></label>
+</div>
+
+<div class="button" style="margin-left: 580px; margin-right: 70px">
+    <label><h3>CP12 GAS CHECK NEXT DUE: {{ gasdate }}</h3></label>
+</div>
+
+<a class = "button" style = "background-color: red; text-align: center; color: white; padding: 10px; border-radius: 4px; text-decoration: none; font-size: 20px; font-weight: bold; margin-left: 580px; "href="{{homelink}}">Delete Purchased Property</a>
+
+
+<style>
+    .coordinates {
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: absolute;
+    bottom: 647px;
+    left: 10px;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 11px;
+    line-height: 18px;
+    border-radius: 3px;
+    display: none;
+    }
+    </style>
+    
+    <div id="map"></div>
+    <pre id="coordinates" class="coordinates"></pre>
+    
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoicm9vbWllcmNhbmluZTI0IiwiYSI6ImNsNTVwMnp2NjFiZDgzaW15OHp6Ym8zYnQifQ.RncuAoBBMjEFjy8b82a3ug';
+    const coordinates = document.getElementById('coordinates');
+    const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [{{ longitude }}, {{ latitude }}],
+    zoom: 16
+    });
+    
+    const marker = new mapboxgl.Marker({
+    draggable: false
+    })
+    .setLngLat([{{ longitude }}, {{ latitude }}])
+    .addTo(map);
+    
+    function onDragEnd() {
+    let lngLat = marker.getLngLat();
+    coordinates.style.display = 'block';
+    coordinates.innerHTML = `Longitude: ${lngLat.lng}<br />Latitude: ${lngLat.lat}`;
+    }
+
+    marker.on('dragend', onDragEnd);
+    </script>
+
+{% endif %}
+
+{% endblock content %}

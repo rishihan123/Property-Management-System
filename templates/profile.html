@@ -1,0 +1,48 @@
+{% extends "layout.html" %} <! inherits the website layout from the layout.html file. Inorder to not repeat code>
+
+{% block content %} <! Overrides the body content of the layout.html file>
+    {% if login %}
+    <div class="button" style="text-align: center">
+        <h1><b>{{name}} | Profile </b></h1>
+    </div>
+
+    <div class="button">
+        <a class="text"><b>Forename: </b>{{forename}}</a>
+        <a class="text" style="float: right; margin-right: 60px;"><b>Email: </b> {{email}}</h1></a>
+    </div>
+
+    <div class="button">
+        <a class="text"><b>Surname: </b>{{surname}}</a>
+        <a class="text" style="float: right; margin-right: 60px;"><b>Password: </b> {{hiddenpassword}}</h1></a>
+    </div>
+
+    <div class="button">
+        <a class="text"><b>Address: </b>{{address}}</a>
+    </div>
+
+    <div class="button">
+        <a class="text"><b>Number: </b>{{number}}</a>
+    </div>
+
+    <div class="button">
+        <a class="text"><b>Mobile: </b>{{mobile}}</a>
+    </div>
+
+    <div class="button">
+        <a class="text" style="margin-top: 50px;"><form action="profile" method = "post">
+        <p>Enter password below if you would like to update details: </p>
+        <p><input type="password" name="verify" placeholder="Password..." required/></p>
+        <p><input type="submit" value="submit" /></p></form></a>
+        {% if error %}
+            <p style="color: red; float: left;"> {{ error }} </p>
+         {% else %}
+            <p> </p>
+        {% endif %}
+    </div>
+
+    {% else %}
+    <div class="button" style="text-align:center; margin-top: 200px; margin-right: 50px">
+        <h1>Please login or create an account to continue</h1>
+    </div>   
+    {% endif %}
+{% endblock content %}

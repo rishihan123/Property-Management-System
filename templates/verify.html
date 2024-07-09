@@ -1,0 +1,56 @@
+{% extends "layout.html" %} <! inherits the website layout from the layout.html file. Inorder to not repeat code>
+
+{% block head %} <! Overrides the head content of the layout.html file so unique styles can be added>
+<style>
+    .button {
+        overflow: hidden;
+    }
+
+    .button a {
+        float: left;
+        display: block;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        font-size: 18px;
+        line-height: 25px;
+        border-radius: 4px;
+        margin-left: 60px;
+    }
+
+    .button a.loginform {
+        float: left;
+        display: block;
+        color: black;
+        text-align: left;
+        text-decoration: none;
+        font-size: 18px;
+        line-height: 25px;
+        border-radius: 4px;
+        margin-left: 20px;
+    }
+
+</style>
+{% endblock head %}
+
+{% block content %} <! Overrides the body content of the layout.html file>
+    <div class="button">
+        <a class="loginform"><h1><b>Please enter the 6 digit verification code that was sent to your email</b></h1></a>
+    </div>
+
+    <div class = "button">
+        <a class="loginform"><form action = "verify" method = "post">
+            <p><input type="text" name="inputcode" placeholder="code..." /></p>
+            <p><input type="submit" value="submit" /></p>
+            {% if error %}
+            <p style="color: red"> {{ error }} </p>
+            {% else %}
+            <p> </p>
+            {% endif %}
+        </form></a>
+    </div>
+
+    <div class="button">
+        <a class="loginform"><h1><b>The code is valid for 5 minutes</b></h1></a>
+    </div>
+{% endblock content %}
